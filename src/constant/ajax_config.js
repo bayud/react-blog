@@ -1,4 +1,4 @@
-const host = "http://localhost:8080/data";
+const host = "http://120.46.41.223:8080/data";
 
 
 export const login = () => {

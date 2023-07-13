@@ -89,7 +89,7 @@ const BlogPages = () => {
                 const nowList = pageNum === 1 ? temp : [...list, ...temp];
                 setList(nowList);
             },
-            () => navigator("/login")
+            () => navigate("/login")
         );
         load(pageNum)
             .then((res) => {

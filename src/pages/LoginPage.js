@@ -12,9 +12,9 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const LoginForm = () => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const onFinish = (values) => {
-    login(values, ()=>history.push('/'),
+    login(values, ()=>navigate('/'),
         (error)=>{});
 };
     return (

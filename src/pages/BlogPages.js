@@ -93,7 +93,7 @@ const BlogPages = () => {
             },
             (error) => {
                 console.log("error-getList", error);
-                if (error === '400') {
+                if (error.message === '400') {
                     navigate("/login");
                 }
                 setLoading(false);

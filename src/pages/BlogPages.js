@@ -92,7 +92,7 @@ const BlogPages = () => {
                 console.log("loading-false", loadingRef.current, loading);
             },
             (error) => {
-                if (error.status === 406) {
+                if (error.status === 400) {
                     navigate("/login");
                 }
                 setLoading(false);

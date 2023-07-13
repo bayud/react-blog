@@ -24,8 +24,8 @@ const post_request = (data, url_path, success_call_back, error_call_back) => {
         credentials: 'include',
         body: JSON.stringify(data)
     }).then(res => {
-            if (res.status === 406) {
-                throw  new Error(res.error());
+        if (res.status !== 200) {
+            throw  new Error(res);
             }
             return res.json();
         }

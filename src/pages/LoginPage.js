@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 
-import {Button, Checkbox, Form, Input, Alert, Layout} from 'antd';
+import {Button, Checkbox, Form, Input, Alert, Layout, Col, Row} from 'antd';
 
 
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
@@ -103,15 +103,19 @@ const LoginForm = () => {
             </Layout>
             {
                 isDialogOpen && ([...Array(errorCount).keys()]).map((item, i) =>
+                    (
+                        <Row>
+                            <Col span={8}/>
+                            <Col span={8}>
+                                <Alert
+                                    message="用户名/密码不正确"
+                                    type="error"
+                                    showIcon
+                                    closable
+                                />
+                            </Col>
+                        </Row>
 
-                    (<Footer style={{padding: "0 500px"}}>
-                            <Alert
-                                message="用户名/密码不正确"
-                                type="error"
-                                showIcon
-                                closable
-                            />
-                        </Footer>
                     ))
             }
         </Layout>

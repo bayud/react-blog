@@ -4,6 +4,7 @@ const host = "http://120.46.41.223:8080/data";
 import {useNavigate} from 'react-router-dom';
 
 export const login = (data) => {
+     console.log("login_data:", data);
     fetch(host + "/login", {
         method: 'POST',
         body: JSON.stringify(data)

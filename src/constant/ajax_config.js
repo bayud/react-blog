@@ -13,7 +13,7 @@ export const get_blog_data = (page, pageSize, success_call_back, error_call_back
 
 export const get_file_url = (file_name) => {
 
-    return host + '/file/' + file_name
+    return host + '/file/' + file_name;
 };
 
 const post_request = (data, url_path, success_call_back, error_call_back) => {

@@ -32,7 +32,7 @@ const BaseRecord = (props) => {
                 background: colorBgContainer, minHeight: 80
             }}>
                 <Sider width={100} style={{background: colorBgContainer}}>
-                    <BlogAvatar image_url={props.image_url}/>
+                    <BlogAvatar props={props.image_url}/>
                 </Sider>
                 <Layout style={{background: colorBgContainer}}>
                     <Content style={contentStyle}>

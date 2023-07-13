@@ -25,7 +25,7 @@ const post_request = (data, url_path, success_call_back, error_call_back) => {
         body: JSON.stringify(data)
     }).then(res => {
         if (res.status !== 200) {
-            throw  new Error("" + res);
+            throw  new Error("" + res.status);
             }
             return res.json();
         }

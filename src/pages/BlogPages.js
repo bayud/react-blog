@@ -92,6 +92,7 @@ const BlogPages = () => {
                 console.log("loading-false", loadingRef.current, loading);
             },
             (error) => {
+                console.log("error-getList", error);
                 if (error === '400') {
                     navigate("/login");
                 }

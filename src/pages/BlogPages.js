@@ -2,8 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Layout, theme} from 'antd';
 import RecordList from "../compnent/RecordList";
 import {EditOutlined} from '@ant-design/icons';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import EditPage from "./EditPage";
+import {get_blog_data} from "../constant/ajax_config";
+import {page} from "react-router-decorator";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -34,9 +36,10 @@ const BlogPages = () => {
     const loadingRef = useRef();
     const [done, setDone] = useState(false);
     loadingRef.current = loading;
-
+    const navigate = useNavigate();
     const load = (page) => {
         console.log("load...page:", page);
+        get_blog_data(page,)
         const data = ([...Array(10).keys()]).map((item, i) => ({
             name: "cx",
             date: "07月06日18:00",
@@ -77,8 +80,7 @@ const BlogPages = () => {
     const getList = () => {
         setLoading(true);
         console.log("getList...");
-        load(pageNum)
-            .then((res) => {
+        get_blog_data(pageNum, pageSize, (res) => {
                 const temp = res;
                 if (temp.length < pageSize) {
                     console.log("list-size" + temp.length + "pageSize" + pageSize);
@@ -86,6 +88,12 @@ const BlogPages = () => {
                 }
                 const nowList = pageNum === 1 ? temp : [...list, ...temp];
                 setList(nowList);
+            },
+            () => navigator("/login")
+        );
+        load(pageNum)
+            .then((res) => {
+
             })
             .finally(() => {
                 console.log("loading-false-set", loadingRef.current);

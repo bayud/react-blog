@@ -11,7 +11,7 @@ export const login = (data) => {
         },
         body: JSON.stringify(data)
     }).then(res => {
-            if (result.status >= 400 && result.status < 500) {
+            if (res.status >= 400 && res.status < 500) {
                 throw new Error('用户名或者密码错误');
             }
             return res.json();

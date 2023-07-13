@@ -1,10 +1,13 @@
-import {Button, Checkbox, Form, Input} from 'antd';
-import Layout from "antd/es/layout";
+import {useState} from 'react';
+
+import {Button, Checkbox, Form, Input, Alert, Layout} from 'antd';
+
+
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import {login} from "../constant/ajax_config";
 import {useNavigate} from 'react-router-dom';
 
-const {Header, Content, Footer, Sider} = Layout;
+const {Header, Content, Footer} = Layout;
 
 
 const onFinishFailed = (errorInfo) => {
@@ -12,82 +15,108 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const LoginForm = () => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [errorCount, setErrorCount] = useState(0);
+
     const navigate = useNavigate();
     const onFinish = (values) => {
-    login(values, ()=>navigate('/'),
-        (error)=>{});
-};
+        login(values, () => navigate('/'),
+            (error) => {
+                console.log("error_login...", error);
+                setIsDialogOpen(true);
+                setErrorCount((pre) => pre + 1);
+
+            });
+    };
+
     return (
-        <Form
-            name="basic"
-            labelCol={{
-                span: 8,
-            }}
-            wrapperCol={{
-                span: 16,
-            }}
-            style={{
-                maxWidth: 3500,
-            }}
-            initialValues={{
-                remember: true,
-            }}
-            onFinish={(values) => onFinish(values)}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-        >
-            <Form.Item
-                label="用户名"
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: '输入用户名',
-                    },
-                ]}
-            >
-                <Input/>
-            </Form.Item>
+        <Layout>
+            <Layout>
+                <Form
+                    name="basic"
+                    labelCol={{
+                        span: 8,
+                    }}
+                    wrapperCol={{
+                        span: 8,
+                    }}
+                    style={{
+                        maxWidth: 6500,
+                    }}
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={(values) => onFinish(values)}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="用户名"
+                        name="username"
+                        rules={[
+                            {
+                                required: true,
+                                message: '输入用户名',
+                            },
+                        ]}
+                    >
+                        <Input/>
+                    </Form.Item>
 
-            <Form.Item
-                label="密码"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: '输入密码！',
-                    },
-                ]}
-            >
-                <Input.Password/>
-            </Form.Item>
+                    <Form.Item
+                        label="密码"
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: '输入密码！',
+                            },
+                        ]}
+                    >
+                        <Input.Password/>
+                    </Form.Item>
 
-            <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                    <Form.Item
+                        name="remember"
+                        valuePropName="checked"
+                        wrapperCol={{
+                            offset: 8,
+                            span: 8,
+                        }}
+                    >
+                        <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
 
-            <Form.Item
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
+                    <Form.Item
+                        wrapperCol={{
+                            offset: 8,
+                            span: 8,
+                        }}
+                    >
 
-                <Button htmlType="submit" style={{color: "#af50b6"}}>
-                    <ArrowRightOutlined/>
-                    进入心情空间
-                </Button>
-            </Form.Item>
-        </Form>
+                        <Button htmlType="submit" style={{color: "#af50b6"}}>
+                            <ArrowRightOutlined/>
+                            进入心情空间
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Layout>
+            {
+                isDialogOpen && ([...Array(errorCount).keys()]).map((item, i) =>
+
+                    (<Footer style={{padding: "0 500px"}}>
+                            <Alert
+                                message="用户名/密码不正确"
+                                type="error"
+                                showIcon
+                                closable
+                            />
+                        </Footer>
+                    ))
+            }
+        </Layout>
     );
-}
+};
 
 const LoginPage = () => (
 

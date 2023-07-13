@@ -6,7 +6,7 @@ import {login} from "../constant/ajax_config";
 const {Header, Content, Footer, Sider} = Layout;
 
 const onFinish = (values) => {
-    login({...values});
+    login(values);
     console.log('Success:', values);
 };
 const onFinishFailed = (errorInfo) => {
@@ -87,7 +87,7 @@ const LoginForm = () => (
 const LoginPage = () => (
 
     <Layout style={{height: "600px"}}>
-        <Header style={{height:"200px"}}/>
+        <Header style={{height: "200px"}}/>
         <br/>
         <br/>
         <br/>

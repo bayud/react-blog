@@ -39,7 +39,6 @@ const BlogPages = () => {
     const navigate = useNavigate();
     const load = (page) => {
         console.log("load...page:", page);
-        get_blog_data(page,)
         const data = ([...Array(10).keys()]).map((item, i) => ({
             name: "cx",
             date: "07月06日18:00",
@@ -88,17 +87,24 @@ const BlogPages = () => {
                 }
                 const nowList = pageNum === 1 ? temp : [...list, ...temp];
                 setList(nowList);
+                console.log("loading-false-set", loadingRef.current);
+                setLoading(false);
+                console.log("loading-false", loadingRef.current, loading);
             },
-            () => navigate("/login")
+            (error) => {
+                if (error.status === 406) {
+                    navigate("/login");
+                }
+                setLoading(false);
+
+            }
         );
         load(pageNum)
             .then((res) => {
 
             })
             .finally(() => {
-                console.log("loading-false-set", loadingRef.current);
-                setLoading(false);
-                console.log("loading-false", loadingRef.current, loading);
+
 
             });
     };

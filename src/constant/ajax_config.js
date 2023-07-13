@@ -21,7 +21,7 @@ const post_request = (data, url_path, success_call_back, error_call_back) => {
         credentials: 'include',
         body: JSON.stringify(data)
     }).then(res => {
-            if (res.status >= 400 && res.status < 500) {
+            if (res.status === 406) {
                 throw  new Error(res.error());
             }
             return res.json();
@@ -42,8 +42,8 @@ const get_request = (data, url_path, success_call_back, error_call_back) => {
         credentials: 'include'
     }).then(res => {
             console.log("get-response:", res);
-            if (res.status >= 400 && res.status < 500) {
-                throw  new Error(res.json());
+            if (res.status !== 200) {
+                throw  new Error(res);
             }
             return res.json();
         }

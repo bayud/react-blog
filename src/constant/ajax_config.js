@@ -12,7 +12,7 @@ export const login = (username, password) => {
         }
     ).then(
         (result) => {
-            console.log("login_result" + result);
+            console.log("login_result", result);
             if (result.status === 200) {
                 const history = useNavigate();
                 history.push('/');

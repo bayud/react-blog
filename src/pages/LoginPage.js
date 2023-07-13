@@ -6,7 +6,7 @@ import {login} from "../constant/ajax_config";
 const {Header, Content, Footer, Sider} = Layout;
 
 const onFinish = (values) => {
-    login();
+    login({...values});
     console.log('Success:', values);
 };
 const onFinishFailed = (errorInfo) => {

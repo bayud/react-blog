@@ -35,7 +35,7 @@ const get_request = (data, url_path, success_call_back, error_call_back) => {
         params.append(key, data[key]);
     });
 
-    const url = host + url_path + params.toString();
+    const url = host + url_path + "?" + params.toString();
     fetch(url, {
         method: 'GET',
     }).then(res => {

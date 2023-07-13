@@ -80,7 +80,7 @@ const BlogPages = () => {
         setLoading(true);
         console.log("getList...");
         get_blog_data(pageNum, pageSize, (res) => {
-                const temp = res;
+                const temp = res['data'];
                 if (temp.length < pageSize) {
                     console.log("list-size" + temp.length + "pageSize" + pageSize);
                     setDone(true);

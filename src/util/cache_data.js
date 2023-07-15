@@ -1,3 +1,5 @@
+import {values} from "mobx";
+
 export function cache_data(key, value) {
     sessionStorage.setItem(key, JSON.stringify(value));
 }
@@ -7,5 +9,5 @@ export function get_data(key) {
 }
 
 export function clear_data(key) {
-    sessionStorage.setItem(key, "");
+    cache_data(key, "");
 }

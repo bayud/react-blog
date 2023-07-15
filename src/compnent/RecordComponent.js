@@ -24,6 +24,13 @@ const BaseRecord = (props) => {
     const {
         token: {colorBgContainer},
     } = theme.useToken();
+
+    const get_date = (dateStr) => {
+        const date = new Date(dateStr);
+        return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日 "
+            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    };
+
     return (
         <Layout style={{padding: '0 0px', background: colorBgContainer}}>
             <Layout hasSider style={{
@@ -49,7 +56,11 @@ const BaseRecord = (props) => {
                             color: '#a094a0',
                             lineHeight: 0,
                             textAlign: "start"
-                        }}>{props.date}</p>
+                        }}>{
+
+                            get_date(props.date)
+
+                        }</p>
                     </Content>
                 </Layout>
             </Layout>

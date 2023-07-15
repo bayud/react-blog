@@ -11,6 +11,7 @@ function App() {
     return (
 
         <BrowserRouter basename="/view">
+            <title>心情空间</title>
             <Routes>
                 <Route path="/" element={<Navigate to="/blog" />} />
                 <Route path="/login" element={<LoginPage/>} />

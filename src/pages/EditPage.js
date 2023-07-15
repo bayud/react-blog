@@ -35,7 +35,7 @@ const EditPage = (props) => {
 
     const submit = () => {
         const value = ref.current.resizableTextArea.textArea.value;
-        post_content({content: value}, navigate('/blog'), navigate('/login'));
+        post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
     };
 
     return (

@@ -16,7 +16,7 @@ export const get_file_url = (file_name) => {
 };
 
 export const post_content = (data, success_call_back, error_call_back) => {
-    post_request(data, '/blog/insert/', success_call_back, error_call_back);
+    post_request(data, '/blog/insert', success_call_back, error_call_back);
 };
 
 
@@ -25,8 +25,7 @@ const post_request = (data, url_path, success_call_back, error_call_back) => {
         method: 'POST',
         redirect: 'follow',
         headers: {
-            "Content-Type": "application/json",
-
+            "Content-Type": "application/json"
         },
         credentials: 'include',
         body: JSON.stringify(data)

@@ -27,8 +27,8 @@ const BaseRecord = (props) => {
 
     const get_date = (dateStr) => {
         const date = new Date(dateStr);
-        return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日 "
-            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return date.getFullYear() + "年" + String(date.getMonth() + 1).padStart(2, '0') + "月" + String(date.getDate()).padStart(2, '0') + "日 "
+            + String(date.getHours()).padStart(2, 0) + ":" + String(date.getMinutes()).padStart(2, "0") + ":" + String(date.getSeconds()).padStart(2, "0");
     };
 
     return (

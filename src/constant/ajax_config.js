@@ -1,4 +1,4 @@
-const host = "http://120.46.41.223:8080/data";
+const host = "http://120.46.41.223:5233/data";
 
 export const login = (data, success_call_back, error_call_back) => {
     post_request(data, "/login", success_call_back, error_call_back);

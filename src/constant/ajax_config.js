@@ -23,8 +23,10 @@ export const post_content = (data, success_call_back, error_call_back) => {
 const post_request = (data, url_path, success_call_back, error_call_back) => {
     fetch(host + url_path, {
         method: 'POST',
+        redirect: 'follow',
         headers: {
             "Content-Type": "application/json",
+
         },
         credentials: 'include',
         body: JSON.stringify(data)

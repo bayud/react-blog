@@ -6,7 +6,7 @@ import RecordList from "../compnent/RecordList";
 import {EditOutlined, EditFilled} from '@ant-design/icons';
 import appState from "../store/mobx.decorator";
 import {Link, useNavigate} from "react-router-dom";
-import {cache_data, get_data} from "../util/cache_data";
+import {cache_data, clear_data, get_data} from "../util/cache_data";
 import {post_content} from "../constant/ajax_config";
 
 const {TextArea} = Input;
@@ -36,6 +36,7 @@ const EditPage = (props) => {
     const submit = () => {
         const value = ref.current.resizableTextArea.textArea.value;
         post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
+        clear_data(BLOG_CACHE_KEY);
     };
 
     return (

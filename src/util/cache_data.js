@@ -5,3 +5,7 @@ export function cache_data(key, value) {
 export function get_data(key) {
     return JSON.parse(sessionStorage.getItem(key));
 }
+
+export function clear_data(key) {
+    sessionStorage.setItem(key, "");
+}

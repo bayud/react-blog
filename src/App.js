@@ -8,25 +8,23 @@ import LoginPage from "./pages/LoginPage";
 import BottomNotice from "./compnent/notice/BottomNotice";
 import {observer} from "mobx-react";
 import notice from "./store/notice";
+import App from "antd/es/app";
 
 
-function App() {
+const myApp = () => (<App>
+    <BrowserRouter basename="/view">
+        <title>心情空间</title>
+        <Routes>
+            <Route path="/" element={<Navigate to="/blog"/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/blog" element={<BlogPages/>}/>
+            <Route path="/edit" element={<EditPage/>}/>
+            <Route path="*" element={<Navigate to="/"/>}/>
+        </Routes>
+        <BottomNotice/>
 
-    return (
-
-        <BrowserRouter basename="/view">
-            <title>心情空间</title>
-            <Routes>
-                <Route path="/" element={<Navigate to="/blog"/>}/>
-                <Route path="/login" element={<LoginPage/>}/>
-                <Route path="/blog" element={<BlogPages/>}/>
-                <Route path="/edit" element={<EditPage/>}/>
-                <Route path="*" element={<Navigate to="/"/>}/>
-            </Routes>
-            <BottomNotice/>
-
-        </BrowserRouter>);
-}
+    </BrowserRouter>
+</App>);
 
 
-export default observer(App);
+export default observer(myApp);

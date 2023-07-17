@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Breadcrumb, Layout, Menu, Row, Col, theme} from 'antd';
+import {App, Row, Col, theme} from 'antd';
 import BlogAvatar from "../compnent/BlogAvatar";
 import notice from "../store/notice";
 import {delete_blog_data} from "../constant/ajax_config";
@@ -14,12 +14,16 @@ const footerStyle = {
 
 };
 
-const contentStyle = {
-    height: 64,
-    color: '#4C464C'
-};
 
 const BaseRecord = (props) => {
+    const {message, modal, notification} = App.useApp();
+
+    const showModal = () => {
+        modal.warning({
+            title: '删除失败',
+            content: '请检查权限',
+        });
+    };
     const navigate = useNavigate();
 
     const reedit = (props) => {
@@ -33,9 +37,12 @@ const BaseRecord = (props) => {
             id: props.id
         };
         delete_blog_data(data, () => {
-        }, (res) => {
-            console.log("res:", res);
-        })
+                window.location.reload();
+            },
+            (error) => {
+                console.log("res:", error.message, error);
+                showModal();
+            })
     };
 
     const handleClick = () => {
@@ -51,7 +58,6 @@ const BaseRecord = (props) => {
                     value: "删除",
                     func: (props) => {
                         deleteRecord(props);
-                        window.location.reload();
                     }
                 },
                 {

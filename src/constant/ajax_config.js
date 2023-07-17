@@ -27,8 +27,6 @@ export const post_content_update = (data, success_call_back, error_call_back) =>
 };
 
 
-
-
 const post_request = (data, url_path, success_call_back, error_call_back) => {
     fetch(host + url_path, {
         method: 'POST',
@@ -59,9 +57,8 @@ const get_request = (data, url_path, success_call_back, error_call_back) => {
         method: 'GET',
         credentials: 'include'
     }).then(res => {
-            console.log("get-response:", res);
             if (res.status !== 200) {
-                throw  new Error("" + res.status);
+                throw new Error("" + res.status);
             }
             return res.json();
         }

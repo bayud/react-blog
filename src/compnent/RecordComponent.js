@@ -80,11 +80,13 @@ const BaseRecord = (props) => {
                     <BlogAvatar image_url={props.image_url}/>
                 </Col>
                 <Col span={17} style={{background: colorBgContainer}}>
-                    <Row style={{padding: "5px 0 0 0"}}>
+                    <Row style={{padding: "5px 0 0 0", height: "30%"}}>
                         <Col span={24} style={{
-                            color: '#0c061f',
+                            // color: '#000000',
                             textAlign: "start",
-                            fontWeight: "bold"
+                            fontWeight: "650",
+                            fontSize: "18px"
+                            // color: "darkred",
                         }}>{props.name}</Col>
                     </Row>
                     <Row style={{padding: "8px 0 0 0"}}>
@@ -107,7 +109,7 @@ const BaseRecord = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{fontSize: "large", paddingLeft: "20px"}}
+                <Col span={24} style={{fontSize: "large", paddingLeft: "10px", paddingRight: "10px", fontWeight: "400"}}
                      class="multiline">{props.content.split('\n').map((line, index) => (
                     <React.Fragment key={index}>
                         {line}

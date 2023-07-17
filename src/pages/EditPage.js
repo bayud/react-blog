@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {Button, Input, Layout, theme} from 'antd';
 import {Col, Row} from 'antd';
 import {observer} from "mobx-react";
+import notice from "../store/notice";
 import RecordList from "../compnent/RecordList";
 import {EditOutlined, EditFilled} from '@ant-design/icons';
 import appState from "../store/mobx.decorator";
-import {Link, useNavigate} from "react-router-dom";
-import {cache_data, clear_data, get_data} from "../util/cache_data";
-import {post_content} from "../constant/ajax_config";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {cache_data_content, clear_data_content, get_data_content} from "../util/cache_data";
+import {post_content, post_content_update} from "../constant/ajax_config";
 
 const {TextArea} = Input;
 const {Header, Content, Footer, Sider} = Layout;
@@ -21,22 +22,29 @@ const BLOG_CACHE_KEY = "blog_cache_key";
 
 function textChange(e) {
     const content = e.target.value;
-    cache_data(BLOG_CACHE_KEY, content);
+    cache_data_content(content);
 }
 
 const EditPage = (props) => {
 
     const ref = React.createRef();
     const navigate = useNavigate();
+    const {id} = useParams();
+
     const {
         token: {colorBgLayout},
     } = theme.useToken();
-    props.appState.get();
-
+    console.log("edit-notice:", notice.bottom);
     const submit = () => {
         const value = ref.current.resizableTextArea.textArea.value;
-        post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
-        clear_data(BLOG_CACHE_KEY);
+        if (id === null) {
+            post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
+
+        } else {
+            post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
+
+        }
+        clear_data_content();
     };
 
     return (
@@ -57,14 +65,35 @@ const EditPage = (props) => {
             </Layout>
             <br/>
             <Layout style={{lineHeight: "20px", background: colorBgLayout}}>
-                <BlogInput defaultValue={get_data(BLOG_CACHE_KEY)}
+                <BlogInput defaultValue={get_data_content()}
                            onChange={(e) => textChange(e)} ref={ref}/>
             </Layout>
+            <Button onClick={() => {
+                notice.bottomShow(
+                    [
+                        {
+                            value: "编辑",
+                            func: (params) => {
+                                console.log(params)
+                            }
+                        },
+                        {
+                            value: "删除"
+                        },
+                        {
+                            value: "取消"
+                        }
+                    ],
+                    ref.current.resizableTextArea.textArea.value,
+                    notice.bottomHide
+                )
+            }}
+            >隐藏</Button>
         </Layout>
     );
 };
 
 
-export default observer(EditPage);
+export default EditPage;
 
 

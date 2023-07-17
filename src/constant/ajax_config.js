@@ -11,6 +11,10 @@ export const get_blog_data = (page, pageSize, success_call_back, error_call_back
     get_request({limit: limit, offset: offset}, "/blog/list", success_call_back, error_call_back);
 };
 
+export const delete_blog_data = (data, success_call_back, error_call_back) => {
+    get_request(data, '/blog/delete', success_call_back, error_call_back);
+};
+
 export const get_file_url = (file_name) => {
     return host + '/file/' + file_name;
 };
@@ -18,6 +22,11 @@ export const get_file_url = (file_name) => {
 export const post_content = (data, success_call_back, error_call_back) => {
     post_request(data, '/blog/insert', success_call_back, error_call_back);
 };
+export const post_content_update = (data, success_call_back, error_call_back) => {
+    post_request(data, '/blog/update', success_call_back, error_call_back);
+};
+
+
 
 
 const post_request = (data, url_path, success_call_back, error_call_back) => {

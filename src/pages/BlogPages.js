@@ -6,6 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import EditPage from "./EditPage";
 import {get_blog_data} from "../constant/ajax_config";
 import {page} from "react-router-decorator";
+import {observer} from "mobx-react";
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -146,4 +147,4 @@ function ParentComponent(Comp) {
 }
 
 
-export default ParentComponent(BlogPages);
+export default observer(ParentComponent(BlogPages));

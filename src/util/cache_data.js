@@ -1,13 +1,16 @@
 import {values} from "mobx";
 
-export function cache_data(key, value) {
+
+const BLOG_CACHE_KEY = "blog_cache_key";
+
+function cache_data(key, value) {
     sessionStorage.setItem(key, JSON.stringify(value));
 }
 
-export function get_data(key) {
+function get_data(key) {
     return JSON.parse(sessionStorage.getItem(key));
 }
 
-export function clear_data(key) {
-    cache_data(key, "");
-}
+export const cache_data_content = (value) => cache_data(BLOG_CACHE_KEY, value);
+export const get_data_content = () => get_data(BLOG_CACHE_KEY);
+export const clear_data_content = () => cache_data(BLOG_CACHE_KEY, "");

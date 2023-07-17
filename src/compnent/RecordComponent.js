@@ -33,7 +33,8 @@ const BaseRecord = (props) => {
             id: props.id
         };
         delete_blog_data(data, () => {
-        }, () => {
+        }, (res) => {
+            console.log("res:", res);
         })
     };
 

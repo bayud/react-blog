@@ -41,6 +41,7 @@ const EditPage = (props) => {
             post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
 
         } else {
+            console.log(id);
             post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
 
         }

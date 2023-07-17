@@ -17,8 +17,6 @@ const notice = observable({
  */
 notice.bottomShow = action((content, params, callback) => {
     notice.bottom = true;
-    console.log("set-bottom-true");
-    console.log("content:", content);
     notice.content = content;
     notice.params = params;
     notice.callBack = callback;

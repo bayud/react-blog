@@ -48,7 +48,10 @@ const BaseRecord = (props) => {
                 },
                 {
                     value: "删除",
-                    func: (props) => deleteRecord(props)
+                    func: (props) => {
+                        deleteRecord(props);
+                        window.location.reload();
+                    }
                 },
                 {
                     value: "取消",
@@ -104,7 +107,7 @@ const BaseRecord = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{fontSize: "large"}}
+                <Col span={24} style={{fontSize: "large", paddingLeft: "10px"}}
                      class="multiline">{props.content.split('\n').map((line, index) => (
                     <React.Fragment key={index}>
                         {line}

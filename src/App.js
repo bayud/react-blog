@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React from "react";
+import React, { useState } from 'react';
 import BlogPages from "./pages/BlogPages";
 import appState from "./store/mobx";
 import EditPage from "./pages/EditPage";
@@ -8,6 +8,8 @@ import {BrowserRouter, HashRouter, Navigate, Route, Routes, Link, Switch, Redire
 import LoginPage from "./pages/LoginPage";
 
 function App() {
+	const [showDialog, setShowDialog] = useState(true);
+
     return (
 
         <BrowserRouter basename="/view">
@@ -19,6 +21,11 @@ function App() {
                 <Route path="/edit" element={<EditPage appState={appState}/>}/>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
+	          {showDialog && (
+        <div className="overlay">
+          <div>底部弹出框</div>
+        </div>
+      )}
         </BrowserRouter>);
 }
 

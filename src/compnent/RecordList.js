@@ -6,12 +6,7 @@ import {LoadingOutlined} from "@ant-design/icons";
 
 
 const RecordList = (props) => {
-    const list = [{
-        id: "10010",
-        image_url: "abc",
-        content: "知道",
-        date: "2023-07-14 14:00:00"
-    }];
+    const list = props.list;
 
     return (
         <Space direction="vertical" size="small" style={{display: 'flex'}}>

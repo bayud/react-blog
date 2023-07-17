@@ -107,7 +107,7 @@ const BaseRecord = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{fontSize: "large", paddingLeft: "10px"}}
+                <Col span={24} style={{fontSize: "large", paddingLeft: "20px"}}
                      class="multiline">{props.content.split('\n').map((line, index) => (
                     <React.Fragment key={index}>
                         {line}

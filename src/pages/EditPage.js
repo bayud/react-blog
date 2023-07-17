@@ -68,27 +68,6 @@ const EditPage = (props) => {
                 <BlogInput defaultValue={get_data_content()}
                            onChange={(e) => textChange(e)} ref={ref}/>
             </Layout>
-            <Button onClick={() => {
-                notice.bottomShow(
-                    [
-                        {
-                            value: "编辑",
-                            func: (params) => {
-                                console.log(params)
-                            }
-                        },
-                        {
-                            value: "删除"
-                        },
-                        {
-                            value: "取消"
-                        }
-                    ],
-                    ref.current.resizableTextArea.textArea.value,
-                    notice.bottomHide
-                )
-            }}
-            >隐藏</Button>
         </Layout>
     );
 };

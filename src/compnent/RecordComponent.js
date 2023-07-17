@@ -114,7 +114,9 @@ const BaseRecord = (props) => {
                         <br/>
                     </React.Fragment>
                 ))}</Col>
-                <br/>
+                <Col span={24}>
+                    <br/>
+                </Col>
             </Row>
         </div>
     );

@@ -6,7 +6,7 @@ import notice from "../store/notice";
 import RecordList from "../compnent/RecordList";
 import {EditOutlined, EditFilled} from '@ant-design/icons';
 import appState from "../store/mobx.decorator";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 import {cache_data_content, clear_data_content, get_data_content} from "../util/cache_data";
 import {post_content, post_content_update} from "../constant/ajax_config";
 
@@ -29,8 +29,9 @@ const EditPage = (props) => {
 
     const ref = React.createRef();
     const navigate = useNavigate();
-    const {id} = useParams();
-
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('id');
     const {
         token: {colorBgLayout},
     } = theme.useToken();
@@ -41,7 +42,6 @@ const EditPage = (props) => {
             post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
 
         } else {
-            console.log(id);
             post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
 
         }

@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import {Breadcrumb, Layout, Menu, theme} from 'antd';
+import {Breadcrumb, Layout, Menu, Row, Col, theme} from 'antd';
 import BlogAvatar from "../compnent/BlogAvatar";
 import notice from "../store/notice";
 import {delete_blog_data} from "../constant/ajax_config";
 import {useNavigate} from "react-router-dom";
-import {cache_data, cache_data_content} from "../util/cache_data";
-
-const {Header, Content, Footer, Sider} = Layout;
+import {cache_data_content} from "../util/cache_data";
 
 const footerStyle = {
     textAlign: 'start',
@@ -17,11 +15,8 @@ const footerStyle = {
 };
 
 const contentStyle = {
-    textAlign: 'start',
-    lineHeight: '6400px',
     height: 64,
-    fontSize: 'large',
-    color: '#4C464C',
+    color: '#4C464C'
 };
 
 const BaseRecord = (props) => {
@@ -76,53 +71,48 @@ const BaseRecord = (props) => {
     };
 
     return (
-        <Layout style={{padding: '0 0px', background: colorBgContainer}} recordId={props.id}>
-            <Layout hasSider style={{
-                display: 'flow layout', alignItems: 'center',
-                padding: '0 20px',
-                background: colorBgContainer, minHeight: 80
-            }}>
-                <Sider width={100} style={{background: colorBgContainer}}>
+        <div style={{padding: '0 0px', background: colorBgContainer}}>
+            <Row style={{height: "80px", padding: "5px 10px 0 10px"}}>
+                <Col span={5} style={{background: colorBgContainer}}>
                     <BlogAvatar image_url={props.image_url}/>
-                </Sider>
-                <Layout style={{background: colorBgContainer}}>
-                    <Content style={contentStyle}>
-                        <p style={{
-                            fontSize: 30,
-                            color: '#050505',
-                            lineHeight: 0,
-                            textAlign: "start"
-                        }}>{props.name}</p>
-                    </Content>
-                    <Content>
-                        <p style={{
+                </Col>
+                <Col span={17} style={{background: colorBgContainer}}>
+                    <Row style={{padding: "5px 0 0 0"}}>
+                        <Col span={24} style={{
+                            color: '#0c061f',
+                            textAlign: "start",
+                            fontWeight: "bold"
+                        }}>{props.name}</Col>
+                    </Row>
+                    <Row style={{padding: "8px 0 0 0"}}>
+                        <Col span={24} style={{
                             fontSize: "small",
                             color: '#a094a0',
-                            lineHeight: 0,
                             textAlign: "start"
                         }}>{
                             get_date(props.date)
-                        }</p>
-                    </Content>
-                    <Sider style={{background: colorBgContainer}}>
-                        <h1 style={{position: "relative"}}>
-                            <div style={{
-                                position: "absolute",
-                                top: 0,
-                                right: 0,
-                                margin: 0,
-                                fontSize: 50,
-                                color: "#a29ca8",
-                                transform: "translate(0%, -100%)"
-                            }} onClick={handleClick}>...
-                            </div>
-                        </h1>
-                    </Sider>
-                </Layout>
-            </Layout>
-            <Content style={{padding: '0 20px'}}>
-                <p style={{fontSize: "large"}}>{props.content}</p></Content>
-        </Layout>
+                        }</Col>
+                    </Row>
+                </Col>
+                <Row/>
+                <Col span={2} style={{background: colorBgContainer}}>
+                    <Row>
+                        <Col span={24} onClick={handleClick}
+                             style={{fontSize: 40, color: "#a094a0", transform: "translate(0%, -60%)"}}>...
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Row>
+                <Col span={24} style={{fontSize: "large"}}
+                     class="multiline">{props.content.split('\n').map((line, index) => (
+                    <React.Fragment key={index}>
+                        {line}
+                        <br/>
+                    </React.Fragment>
+                ))}</Col>
+            </Row>
+        </div>
     );
 };
 

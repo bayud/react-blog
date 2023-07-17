@@ -19,9 +19,7 @@ const dialogOverlay = {
 
 const dialog = {
     backgroundColor: "white",
-    padding: "20px",
     borderRadius: "4px",
-    marginBottom: "20px",
     width: "100%"
 };
 
@@ -49,20 +47,22 @@ const BottomNotice = () => {
         <div>
             {notice.bottom && (
                 <div className="overlay" style={dialogOverlay}>
-                    <Row style={dialog} ref={dialogRef}>
+                    <div style={dialog} ref={dialogRef}>
                         {notice.content.map((item, key) =>
-                            <Col span={24}><Button style={{width: "100%"}}
-                                                   onClick={
-                                                       () => {
-                                                           new Promise((resolve, reject) => {
-                                                               item.func(notice.params);
-                                                               resolve(1);
-                                                           }).then(notice.callBack);
-                                                       }
+                            <Row>
+                                <Col span={24}><Button style={{width: "100%", height: "60px"}}
+                                                       onClick={
+                                                           () => {
+                                                               new Promise((resolve, reject) => {
+                                                                   item.func(notice.params);
+                                                                   resolve(1);
+                                                               }).then(notice.callBack);
+                                                           }
 
-                                                   }>{item.value}</Button></Col>
+                                                       }>{item.value}</Button></Col>
+                            </Row>
                         )}
-                    </Row>
+                    </div>
                 </div>
             )}
         </div>

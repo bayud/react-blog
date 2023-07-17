@@ -4,8 +4,8 @@ import {get_file_url} from "../constant/ajax_config";
 
 const BlogAvatar = (props) => {
     return (
-        <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}
-                size={80}
+        <Avatar size={60} icon={<UserOutlined/>}
+
                 src={get_file_url(props.image_url)}/>
     )
 };

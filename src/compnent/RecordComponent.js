@@ -58,7 +58,7 @@ const BaseRecord = (props) => {
                     value: "删除",
                     func: (props) => {
                         console.log("加载确认对话框");
-                        notice.confirm.confirmShow("确认删除本条记录吗?", ()=>deleteRecord(props));
+                        notice.confirmShow("确认删除本条记录吗?", ()=>deleteRecord(props));
                     }
                 },
                 {

@@ -46,13 +46,9 @@ notice.confirmShow = action(
         if (cancelFunc !== undefined) {
             notice.confirm.cancel = cancelFunc;
         }
-        notice.confirmShow();
+        notice.confirm.value = true;
     }
 );
-
-notice.confirmShow = action(() => {
-    notice.confirm.value = true;
-});
 
 notice.confirmHie = action(() => {
     notice.confirm.value = false;

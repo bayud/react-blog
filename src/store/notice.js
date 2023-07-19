@@ -1,11 +1,21 @@
-import {observable, action} from "mobx";
+import { observable, action } from "mobx";
 
 // 创建观察者
 const notice = observable({
-    bottom: false,
-    content: [],
-    params: {},
-    callBack: () => notice.bottomHide()
+    bottom: {
+        value: false,
+        content: [],
+        params: {},
+        callBack: () => notice.bottomHide()
+    },
+    confirm: {
+        value: false,
+        content: "确认对话框",
+        submitFunc: () => { },
+        cancel: () => notice.confirmHie(),
+        submit: ()=>{notice.confirm.submitFunc(); 
+            notice.confirmHie()}
+    }
 });
 
 /**
@@ -16,15 +26,33 @@ const notice = observable({
  * @type {Function}
  */
 notice.bottomShow = action((content, params, callback) => {
-    notice.bottom = true;
-    notice.content = content;
-    notice.params = params;
-    notice.callBack = callback;
+    notice.bottom.value = true;
+    notice.bottom.content = content;
+    notice.bottom.params = params;
+    notice.bottom.callBack = callback;
 });
 notice.bottomHide = action(() => {
 
-    notice.bottom = false;
+    notice.bottom.value = false;
 
+});
+
+notice.confirmShow(content, confirmFunc, cancelFunc) = action(
+    ()=>{
+        notice.confirm.submitFunc = confirmFunc;
+        if(cancelFunc !== undefined){
+            notice.confirm.cancel = cancelFunc;
+        }
+        notice.confirmShow();
+    }
+);
+
+notice.confirmShow = action(() => {
+    notice.confirm.value = true;
+});
+
+notice.confirmHie = action(() => {
+    notice.confirm.value = false;
 });
 
 export default notice;

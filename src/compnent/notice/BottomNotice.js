@@ -1,8 +1,8 @@
-import {observer} from "mobx-react";
-import React, {useEffect, useRef} from "react";
+import { observer } from "mobx-react";
+import React, { useEffect, useRef } from "react";
 
 import notice from "../../store/notice";
-import {Button, Col, Row} from 'antd';
+import { Button, Col, Row } from 'antd';
 
 const dialogOverlay = {
     position: "fixed",
@@ -42,24 +42,24 @@ const BottomNotice = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    console.log("detect-bottom:", notice.bottom);
+    console.log("detect-bottom:", notice.bottom.value);
     return (
         <div>
-            {notice.bottom && (
+            {notice.bottom.value && (
                 <div className="overlay" style={dialogOverlay}>
                     <div style={dialog} ref={dialogRef}>
-                        {notice.content.map((item, key) =>
+                        {notice.bottom.content.map((item, key) =>
                             <Row>
-                                <Col span={24}><Button style={{width: "100%", height: "60px"}}
-                                                       onClick={
-                                                           () => {
-                                                               new Promise((resolve, reject) => {
-                                                                   item.func(notice.params);
-                                                                   resolve(1);
-                                                               }).then(notice.callBack);
-                                                           }
+                                <Col span={24}><Button style={{ width: "100%", height: "60px" }}
+                                    onClick={
+                                        () => {
+                                            new Promise((resolve, reject) => {
+                                                item.func(notice.bottom.params);
+                                                resolve(1);
+                                            }).then(notice.bottom.callBack);
+                                        }
 
-                                                       }>{item.value}</Button></Col>
+                                    }>{item.value}</Button></Col>
                             </Row>
                         )}
                     </div>

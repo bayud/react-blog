@@ -38,20 +38,7 @@ const BlogPages = () => {
     const [done, setDone] = useState(false);
     loadingRef.current = loading;
     const navigate = useNavigate();
-    const load = (page) => {
-        console.log("load...page:", page);
-        const data = ([...Array(10).keys()]).map((item, i) => ({
-            name: "cx",
-            date: "07月06日18:00",
-            content: "第" + (i + (page - 1) * 10) + "條內容"
-        }));
-        return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(data);
-                }, 1000)
-            }
-        )
-    };
+
     // 监听页面滚动
     const handleOnScroll = () => {
         console.log("页面发生滚动...");
@@ -73,10 +60,13 @@ const BlogPages = () => {
         token: {colorBgContainer},
     } = theme.useToken();
 
+     // 监听页面变动
     useEffect(() => {
         getList();
     }, [pageNum]);
 
+
+    // 获取数据列表
     const getList = () => {
         setLoading(true);
         console.log("getList...");

@@ -35,7 +35,7 @@ const EditPage = (props) => {
     const {
         token: {colorBgLayout},
     } = theme.useToken();
-    console.log("edit-notice:", notice.bottom);
+    console.log("edit-notice:", notice.bottom.value);
     const submit = () => {
         const value = ref.current.resizableTextArea.textArea.value;
         if (id === null) {

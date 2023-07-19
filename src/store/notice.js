@@ -13,8 +13,10 @@ const notice = observable({
         content: "确认对话框",
         submitFunc: () => { },
         cancel: () => notice.confirmHie(),
-        submit: ()=>{notice.confirm.submitFunc(); 
-            notice.confirmHie()}
+        submit: () => {
+            notice.confirm.submitFunc();
+            notice.confirmHie()
+        }
     }
 });
 
@@ -38,9 +40,10 @@ notice.bottomHide = action(() => {
 });
 
 notice.confirmShow = action(
-    (content, confirmFunc, cancelFunc)=>{
+    (content, confirmFunc, cancelFunc) => {
+        notice.confirm.content = content;
         notice.confirm.submitFunc = confirmFunc;
-        if(cancelFunc !== undefined){
+        if (cancelFunc !== undefined) {
             notice.confirm.cancel = cancelFunc;
         }
         notice.confirmShow();

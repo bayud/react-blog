@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {App, Row, Col, theme} from 'antd';
+import React, { Component } from 'react';
+import { App, Row, Col, theme } from 'antd';
 import BlogAvatar from "../compnent/BlogAvatar";
 import notice from "../store/notice";
-import {delete_blog_data} from "../constant/ajax_config";
-import {useNavigate} from "react-router-dom";
-import {cache_data_content} from "../util/cache_data";
+import { delete_blog_data } from "../constant/ajax_config";
+import { useNavigate } from "react-router-dom";
+import { cache_data_content } from "../util/cache_data";
 
 const footerStyle = {
     textAlign: 'start',
@@ -16,7 +16,7 @@ const footerStyle = {
 
 
 const BaseRecord = (props) => {
-    const {message, modal, notification} = App.useApp();
+    const { message, modal, notification } = App.useApp();
 
     const showModal = () => {
         modal.warning({
@@ -37,8 +37,8 @@ const BaseRecord = (props) => {
             id: props.id
         };
         delete_blog_data(data, () => {
-                window.location.reload();
-            },
+            window.location.reload();
+        },
             (error) => {
                 console.log("res:", error.message, error);
                 showModal();
@@ -57,12 +57,12 @@ const BaseRecord = (props) => {
                 {
                     value: "删除",
                     func: (props) => {
-                        deleteRecord(props);
+                        notice.confirm.confirmShow("确认删除本条记录吗?", ()=>deleteRecord(props));
                     }
                 },
                 {
                     value: "取消",
-                    func: () => notice.bottomHide()
+                    func: () =>notice.bottomHide()
                 }
             ],
             props,
@@ -71,7 +71,7 @@ const BaseRecord = (props) => {
     };
 
     const {
-        token: {colorBgContainer},
+        token: { colorBgContainer },
     } = theme.useToken();
 
     const get_date = (dateStr) => {
@@ -81,13 +81,13 @@ const BaseRecord = (props) => {
     };
 
     return (
-        <div style={{padding: '0 0px', background: colorBgContainer}}>
-            <Row style={{height: "80px", padding: "5px 10px 0 10px"}}>
-                <Col span={5} style={{background: colorBgContainer}}>
-                    <BlogAvatar image_url={props.image_url}/>
+        <div style={{ padding: '0 0px', background: colorBgContainer }}>
+            <Row style={{ height: "80px", padding: "5px 10px 0 10px" }}>
+                <Col span={5} style={{ background: colorBgContainer }}>
+                    <BlogAvatar image_url={props.image_url} />
                 </Col>
-                <Col span={17} style={{background: colorBgContainer}}>
-                    <Row style={{padding: "5px 0 0 0", height: "30%"}}>
+                <Col span={17} style={{ background: colorBgContainer }}>
+                    <Row style={{ padding: "5px 0 0 0", height: "30%" }}>
                         <Col span={24} style={{
                             // color: '#000000',
                             textAlign: "start",
@@ -96,37 +96,37 @@ const BaseRecord = (props) => {
                             // color: "darkred",
                         }}>{props.name}</Col>
                     </Row>
-                    <Row style={{padding: "8px 0 0 0"}}>
+                    <Row style={{ padding: "8px 0 0 0" }}>
                         <Col span={24} style={{
                             fontSize: "small",
                             color: '#a094a0',
                             textAlign: "start"
                         }}>{
-                            get_date(props.date)
-                        }</Col>
+                                get_date(props.date)
+                            }</Col>
                     </Row>
                 </Col>
-                <Row/>
-                <Col span={2} style={{background: colorBgContainer}}>
+                <Row />
+                <Col span={2} style={{ background: colorBgContainer }}>
                     <Row>
                         <Col span={24} onClick={handleClick}
-                             style={{fontSize: 40, color: "#a094a0", transform: "translate(0%, -60%)"}}>...
+                            style={{ fontSize: 40, color: "#a094a0", transform: "translate(0%, -60%)" }}>...
                         </Col>
                     </Row>
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{fontSize: "large", paddingLeft: "10px", paddingRight: "10px", fontWeight: "400"}}
-                     class="multiline">{props.content.split('\n').map((line, index) => (
-                    <React.Fragment key={index}>
-                        {line}
-                        <br/>
-                    </React.Fragment>
-                ))}</Col>
+                <Col span={24} style={{ fontSize: "large", paddingLeft: "10px", paddingRight: "10px", fontWeight: "400" }}
+                    class="multiline">{props.content.split('\n').map((line, index) => (
+                        <React.Fragment key={index}>
+                            {line}
+                            <br />
+                        </React.Fragment>
+                    ))}</Col>
 
             </Row>
             <Row>
-                <br/>
+                <br />
             </Row>
         </div>
     );
@@ -139,7 +139,7 @@ export default class RecordComponent extends Component {
     }
 
     render() {
-        return (<BaseRecord {...this.props}/>);
+        return (<BaseRecord {...this.props} />);
     }
 };
 

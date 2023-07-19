@@ -57,6 +57,7 @@ const BaseRecord = (props) => {
                 {
                     value: "删除",
                     func: (props) => {
+                        console.log("加载确认对话框");
                         notice.confirm.confirmShow("确认删除本条记录吗?", ()=>deleteRecord(props));
                     }
                 },
@@ -116,8 +117,7 @@ const BaseRecord = (props) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{ fontSize: "large", paddingLeft: "10px", paddingRight: "10px", fontWeight: "400" }}
-                    class="multiline">{props.content.split('\n').map((line, index) => (
+                <Col span={24} style={{ fontSize: "large", paddingLeft: "10px", paddingRight: "10px", fontWeight: "400" }}>{props.content.split('\n').map((line, index) => (
                         <React.Fragment key={index}>
                             {line}
                             <br />

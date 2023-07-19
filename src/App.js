@@ -6,8 +6,8 @@ import EditPage from "./pages/EditPage";
 import {BrowserRouter, HashRouter, Navigate, Route, Routes, Link, Switch, Redirect} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BottomNotice from "./compnent/notice/BottomNotice";
+import ConfirmModal from "./compnent/notice/ConfirmDialog";
 import {observer} from "mobx-react";
-import notice from "./store/notice";
 import App from "antd/es/app";
 
 
@@ -22,8 +22,8 @@ const myApp = () => (<App>
             <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
         <BottomNotice/>
-
     </BrowserRouter>
+    <ConfirmModal/>
 </App>);
 
 

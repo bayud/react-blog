@@ -37,8 +37,8 @@ notice.bottomHide = action(() => {
 
 });
 
-notice.confirmShow(content, confirmFunc, cancelFunc) = action(
-    ()=>{
+notice.confirmShow = action(
+    (content, confirmFunc, cancelFunc)=>{
         notice.confirm.submitFunc = confirmFunc;
         if(cancelFunc !== undefined){
             notice.confirm.cancel = cancelFunc;

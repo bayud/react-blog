@@ -6,6 +6,7 @@ import {delete_blog_data} from "../constant/ajax_config";
 import {useNavigate} from "react-router-dom";
 import {cache_data_content} from "../util/cache_data";
 import PhotoViewGroupCom from "./PhotoViewGroupCom";
+import fileList from "../store/fileListMobx";
 
 
 const BaseRecord = (props) => {
@@ -21,6 +22,7 @@ const BaseRecord = (props) => {
 
     const reedit = (props) => {
         cache_data_content(props.content);
+        fileList.setNewList(props.links.map((item, i) => Object({"url": item})));
         const id = props.id;
         navigate(`/edit?id=${id}`);
     };

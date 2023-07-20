@@ -30,6 +30,8 @@ export const post_content_update = (data, success_call_back, error_call_back) =>
 const getFormValue = (value) => {
     if (value instanceof File) {
         return value
+    } else if (value instanceof Object) {
+        return JSON.stringify(value);
     } else {
         return String(value);
     }

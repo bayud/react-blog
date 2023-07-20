@@ -4,12 +4,12 @@ import {get_file_url} from "../constant/ajax_config";
 
 const PhotoViewGroupCom = (props) => {
         console.log("photoView", props);
-        const width = 130
+        const width = 125
         return (
-            <Image.PreviewGroup
-                preview={{
-                    onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
-                }}
+            <Image.PreviewGroup style={{paddingLeft: "10px", paddingRight: "10px"}}
+                                preview={{
+                                    onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
+                                }}
             >
 
                 {

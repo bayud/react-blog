@@ -23,8 +23,24 @@ export const post_content = (data, success_call_back, error_call_back) => {
     post_request(data, '/blog/insert', success_call_back, error_call_back);
 };
 export const post_content_update = (data, success_call_back, error_call_back) => {
-    post_request(data, '/blog/update', success_call_back, error_call_back);
+    post_form_data(data, '/blog/update', success_call_back, error_call_back);
 };
+
+
+const post_form_data = (data, url_path, success_call_back, error_call_back) => {
+    fetch(host + url_path, {
+        method: 'POST',
+        redirect: 'follow',
+        credentials: 'include',
+        body: data
+    }).then(res => {
+            if (res.status !== 200) {
+                throw  new Error("" + res.status);
+            }
+            return res.json();
+        }
+    ).then(success_call_back, error_call_back);
+}
 
 
 const post_request = (data, url_path, success_call_back, error_call_back) => {

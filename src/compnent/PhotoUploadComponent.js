@@ -15,13 +15,7 @@ const PhotoUploadCom = () => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [currentFileList, setCurrentFileList] = useState([
-        {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        }]);
+    const [currentFileList, setCurrentFileList] = useState([]);
 
     const handleCancel = () => setPreviewOpen(false);
 

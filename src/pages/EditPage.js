@@ -39,44 +39,55 @@ const EditPage = (props) => {
     console.log("edit-notice:", notice.bottom.value);
     const submit = () => {
         console.log("fileList:", fileList.value);
-        // const value = ref.current.resizableTextArea.textArea.value;
-        // if (id === null) {
-        //     post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
-        //
-        // } else {
-        //     post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
-        //
-        // }
-        // clear_data_content();
+        const value = ref.current.resizableTextArea.textArea.value;
+        if (id === null) {
+            post_content({
+                content: value,
+                files: fileList.map((item, i) => item.originFileObj)
+            }, () => navigate('/blog'), () => navigate('/login'));
+
+        } else {
+            const ori_file_arr = fileList.filter((item, i) => item.url).map((item, i) => [String(i), item.url]);
+            const ori_file_dict = Object();
+            ori_file_arr.forEach(x => ori_file_dict[x[0]] = x[1]);
+            post_content_update({
+                content: {content: value, id: id},
+                files: fileList.filter((item) => item.originFileObj).map((item, i) => item.originFileObj),
+                ori_files: ori_file_dict
+            }, () => navigate('/blog'), () => navigate('/login'));
+
+        }
+        clear_data_content();
     };
 
-    return (
-        <Layout style={{padding: '0 0px', background: colorBgLayout}}>
-            <Layout style={{padding: '0 0px', background: '#ffffff', lineHeight: "80px"}}>
-                <Row>
-                    <Col span={6} style={{textAlign: "center"}}>
-                        <Link to="/blog" style={{color: '#a29ca8'}}>取消</Link>
-                    </Col>
-                    <Col span={2}/>
-                    <Col span={8} style={{textAlign: "center", fontWeight: "bold"}}>写心情
-                    </Col>
-                    <Col span={2}/>
-                    <Col span={6}>
-                        <Button type="primary" onClick={submit}>发表</Button>
-                    </Col>
-                </Row>
+        return (
+            <Layout style={{padding: '0 0px', background: colorBgLayout}}>
+                <Layout style={{padding: '0 0px', background: '#ffffff', lineHeight: "80px"}}>
+                    <Row>
+                        <Col span={6} style={{textAlign: "center"}}>
+                            <Link to="/blog" style={{color: '#a29ca8'}}>取消</Link>
+                        </Col>
+                        <Col span={2}/>
+                        <Col span={8} style={{textAlign: "center", fontWeight: "bold"}}>写心情
+                        </Col>
+                        <Col span={2}/>
+                        <Col span={6}>
+                            <Button type="primary" onClick={submit}>发表</Button>
+                        </Col>
+                    </Row>
+                </Layout>
+                <br/>
+                <Layout style={{lineHeight: "20px", background: colorBgLayout}}>
+                    <BlogInput defaultValue={get_data_content()}
+                               onChange={(e) => textChange(e)} ref={ref}/>
+                </Layout>
+                <Layout>
+                    <PhotoUploadCom/>
+                </Layout>
             </Layout>
-            <br/>
-            <Layout style={{lineHeight: "20px", background: colorBgLayout}}>
-                <BlogInput defaultValue={get_data_content()}
-                           onChange={(e) => textChange(e)} ref={ref}/>
-            </Layout>
-            <Layout>
-                <PhotoUploadCom/>
-            </Layout>
-        </Layout>
-    );
-};
+        );
+    }
+;
 
 
 export default observer(EditPage);

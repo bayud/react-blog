@@ -11,7 +11,6 @@ const PhotoViewGroupCom = (props) => {
                                     onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
                                 }}
             >
-
                 {
                     props.list && props.list.length && props.list.map((item, i) =>
                         <Image width={width} src={get_file_url(item)}/>

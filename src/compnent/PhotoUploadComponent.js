@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {PlusOutlined} from '@ant-design/icons';
 import {Modal, Upload, message} from 'antd';
 import fileList from "../store/fileListMobx";
+import {get_file_url} from "../constant/ajax_config";
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -25,7 +26,7 @@ const PhotoUploadCom = () => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
-        setPreviewImage(file.url || file.preview);
+        setPreviewImage((file.url && get_file_url(file.url)) || file.preview);
         setPreviewOpen(true);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };

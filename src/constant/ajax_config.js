@@ -20,7 +20,7 @@ export const get_file_url = (file_name) => {
 };
 
 export const post_content = (data, success_call_back, error_call_back) => {
-    post_request(data, '/blog/insert', success_call_back, error_call_back);
+    post_form_data(data, '/blog/insert', success_call_back, error_call_back);
 };
 export const post_content_update = (data, success_call_back, error_call_back) => {
     post_form_data(data, '/blog/update', success_call_back, error_call_back);

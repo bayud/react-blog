@@ -51,7 +51,7 @@ const EditPage = (props) => {
             const ori_file_dict = Object();
             ori_file_arr.forEach(x => ori_file_dict[x[0]] = x[1]);
             post_content_update({
-                content: {content: value, id: id},
+                content: {content: value, id: Number(id)},
                 files: fileList.value.filter((item) => item.originFileObj).map((item, i) => item.originFileObj),
                 ori_files: ori_file_dict
             }, () => navigate('/blog'), () => navigate('/login'));

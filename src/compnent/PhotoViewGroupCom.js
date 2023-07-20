@@ -13,7 +13,7 @@ const PhotoViewGroupCom = (props) => {
             >
 
                 {
-                    props.list && props.length && props.list.map((item, i) =>
+                    props.list && props.list.length && props.list.map((item, i) =>
                         <Image width={width} src={get_file_url(item)}/>
                     )
                 }

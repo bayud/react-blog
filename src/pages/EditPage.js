@@ -3,19 +3,20 @@ import {Button, Input, Layout, theme} from 'antd';
 import {Col, Row} from 'antd';
 import {observer} from "mobx-react";
 import notice from "../store/notice";
-import RecordList from "../compnent/RecordList";
-import {EditOutlined, EditFilled} from '@ant-design/icons';
-import appState from "../store/mobx.decorator";
+
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import {cache_data_content, clear_data_content, get_data_content} from "../util/cache_data";
 import {post_content, post_content_update} from "../constant/ajax_config";
+import PhotoUploadCom from "../compnent/PhotoUploadComponent";
+import fileList from "../store/fileListMobx";
 
 const {TextArea} = Input;
 const {Header, Content, Footer, Sider} = Layout;
 
 
 const BlogInput =
-    React.forwardRef((props, ref) => <TextArea rows={10} placeholder="写下今天的心情" ref={ref} maxLength={1000} {...props}/>);
+    React.forwardRef((props, ref) => <TextArea rows={10} placeholder="写下今天的心情" ref={ref}
+                                               maxLength={1000} {...props}/>);
 
 
 const BLOG_CACHE_KEY = "blog_cache_key";
@@ -37,15 +38,16 @@ const EditPage = (props) => {
     } = theme.useToken();
     console.log("edit-notice:", notice.bottom.value);
     const submit = () => {
-        const value = ref.current.resizableTextArea.textArea.value;
-        if (id === null) {
-            post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
-
-        } else {
-            post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
-
-        }
-        clear_data_content();
+        console.log("fileList:", fileList.value);
+        // const value = ref.current.resizableTextArea.textArea.value;
+        // if (id === null) {
+        //     post_content({content: value}, () => navigate('/blog'), () => navigate('/login'));
+        //
+        // } else {
+        //     post_content_update({content: value, id: id}, () => navigate('/blog'), () => navigate('/login'));
+        //
+        // }
+        // clear_data_content();
     };
 
     return (
@@ -69,11 +71,14 @@ const EditPage = (props) => {
                 <BlogInput defaultValue={get_data_content()}
                            onChange={(e) => textChange(e)} ref={ref}/>
             </Layout>
+            <Layout>
+                <PhotoUploadCom/>
+            </Layout>
         </Layout>
     );
 };
 
 
-export default EditPage;
+export default observer(EditPage);
 
 

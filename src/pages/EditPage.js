@@ -43,16 +43,16 @@ const EditPage = (props) => {
         if (id === null) {
             post_content({
                 content: value,
-                files: fileList.map((item, i) => item.originFileObj)
+                files: fileList.value.map((item, i) => item.originFileObj)
             }, () => navigate('/blog'), () => navigate('/login'));
 
         } else {
-            const ori_file_arr = fileList.filter((item, i) => item.url).map((item, i) => [String(i), item.url]);
+            const ori_file_arr = fileList.value.filter((item, i) => item.url).map((item, i) => [String(i), item.url]);
             const ori_file_dict = Object();
             ori_file_arr.forEach(x => ori_file_dict[x[0]] = x[1]);
             post_content_update({
                 content: {content: value, id: id},
-                files: fileList.filter((item) => item.originFileObj).map((item, i) => item.originFileObj),
+                files: fileList.value.filter((item) => item.originFileObj).map((item, i) => item.originFileObj),
                 ori_files: ori_file_dict
             }, () => navigate('/blog'), () => navigate('/login'));
 

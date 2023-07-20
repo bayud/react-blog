@@ -27,18 +27,46 @@ export const post_content_update = (data, success_call_back, error_call_back) =>
 };
 
 
+const getFormValue = (value) => {
+    if (value instanceof File) {
+        return value
+    } else {
+        return String(value);
+    }
+}
+
+const objectToFormData = (obj) => {
+    const formData = new FormData();
+
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const value = obj[key];
+
+            if (Array.isArray(value)) {
+                // 处理值为列表的情况，将每个元素添加到同一个键名下
+                value.forEach((item) => formData.append(key, getFormValue(item)));
+            } else {
+                // 将值转换为字符串，并将键值对添加到 FormData 对象
+                formData.append(key, getFormValue(value));
+            }
+        }
+    }
+    return formData;
+};
 const post_form_data = (data, url_path, success_call_back, error_call_back) => {
-    console.log("post-form:data", data);
+    const formData = objectToFormData(data);
+    console.log("post-form:data", formData);
+
     fetch(host + url_path, {
         method: 'POST',
         redirect: 'follow',
         credentials: 'include',
-        body: data
+        body: formData
     }).then(res => {
-        if (res.status !== 200) {
-            throw  new Error("" + res.status);
-        }
-        return res.json();
+            if (res.status !== 200) {
+                throw  new Error("" + res.status);
+            }
+            return res.json();
         }
     ).then(success_call_back, error_call_back);
 }
@@ -54,8 +82,8 @@ const post_request = (data, url_path, success_call_back, error_call_back) => {
         credentials: 'include',
         body: JSON.stringify(data)
     }).then(res => {
-        if (res.status !== 200) {
-            throw  new Error("" + res.status);
+            if (res.status !== 200) {
+                throw  new Error("" + res.status);
             }
             return res.json();
         }

@@ -15,7 +15,9 @@ const PhotoUploadCom = () => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [currentFileList, setCurrentFileList] = useState([]);
+    const [currentFileList, setCurrentFileList] = useState([
+        ...fileList.value
+    ]);
 
     const handleCancel = () => setPreviewOpen(false);
 
